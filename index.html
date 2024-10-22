@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Bedrock Launcher Lite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            transition: background-image 1s ease-in-out;
+        }
+
+        .icon:hover {
+            transform: scale(1.2);
+            transition: transform 0.2s;
+        }
+
+        .button:hover {
+            transform: translateY(-5px);
+            transition: transform 0.2s;
+        }
+    </style>
+    <script>
+        let backgrounds = [];
+        for (let i = 1; i <= 14; i++) {
+            backgrounds.push(`backgrounds/background${i}.png`);
+        }
+        let currentBackground = 0;
+
+        function changeBackground() {
+            currentBackground = (currentBackground + 1) % backgrounds.length;
+            document.body.style.backgroundImage = `url(${backgrounds[currentBackground]})`;
+        }
+
+        setInterval(changeBackground, 5000);
+    </script>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-900" style="background-image: url('backgrounds/background1.png');">
+    <header class="w-full bg-gray-800 p-4 flex items-center justify-between fixed top-0 left-0">
+        <div class="flex items-center">
+            <img src="logo2.png" alt="Bedrock Launcher Icon" class="w-10 h-10 mr-2" height="40" width="40"/>
+            <span class="text-white text-lg">Bedrock Launcher Lite</span>
+        </div>
+        <div class="flex items-center">
+            <i class="fas fa-search text-white text-xl mr-4"></i>
+            <i class="fas fa-bars text-white text-xl"></i>
+        </div>
+    </header>
+    <main class="flex flex-col items-center text-center mt-16">
+        <img src="logo.png" alt="Minecraft and Bedrock Launcher Logo" class="w-[660px] h-[168px] mt-4" height="168" width="660"/>
+        <p class="text-lg mt-4">An unofficial Minecraft Bedrock for Windows Launcher</p>
+        <p class="text-sm mt-2">
+            <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+            Bedrock Launcher does not pirate Minecraft, you need to own a legal copy
+            <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+        </p>
+        <div class="flex mt-6 space-x-4">
+            <a href="https://youtu.be/dQw4w9WgXcQ?si=WREMKCLoOpf7--UZ" target="_blank" class="button bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                DOWNLOAD
+            </a>
+            <a href="installation_guide.html" target="_blank" class="button bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                INSTALLATION GUIDE
+            </a>            
+            <a href="https://linktr.ee/atharvpose" target="_blank" class="button bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                ABOUT THE DEVELOPER
+            </a>
+        </div>
+        <div class="flex mt-6 space-x-4">
+            <a href="https://discord.com/users/556853648399794177" target="_blank" class="icon">
+                <i class="fab fa-discord text-3xl text-green-500"></i>
+            </a>
+            <a href="http://www.youtube.com/@yoursfaithfulgamer" target="_blank" class="icon">
+                <i class="fab fa-youtube text-3xl text-green-500"></i>
+            </a>
+            <a href="https://github.com/Atharv3142M" target="_blank" class="icon">
+                <i class="fab fa-github text-3xl text-green-500"></i>
+            </a>
+        </div>
+    </main>
+</body>
+</html>
