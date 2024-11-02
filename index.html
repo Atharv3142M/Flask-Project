@@ -1,225 +1,265 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Blog Title with Day/Night Toggle</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            color: white;
-            overflow-y: auto;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            transition: background 0.5s ease-in-out;
-        }
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>A Blog By Gamers For Gamers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font awesome icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
 
-        /* Center content alignment */
-        .content-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding-top: 100px;
-            flex-grow: 1;
-            text-align: center;
-        }
-
-        /* Translucent content box */
-        .translucent-window {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 800px;
-            margin: 20px auto;
-        }
-
-        /* Header Styles */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 10px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header nav a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: white;
-        }
-
-        /* Toggle Styles */
-        label {
-            display: block;
-            width: 100px;
-            height: 50px;
-            background: rgb(202, 202, 202);
-            border-radius: 30mm;
-            position: relative;
-            cursor: pointer;
-            overflow: hidden;
-            box-shadow: 0 0 15px 5px rgba(83, 180, 229, 0.5);
-        }
-
-        label .thumb {
-            position: absolute;
-            width: 44px;
-            height: 44px;
-            background: rgb(23, 24, 33);
-            top: 3px;
-            left: 3px;
-            border-radius: 50%;
-            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2), 3px 3px 0 rgba(100, 100, 100, 0.2);
-            overflow: hidden;
-            transition: 0.5s ease-in;
-        }
-
-        .rotator {
-            display: block;
-            width: 200%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            transition: 0.5s ease-in;
-        }
-
-        .side {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.5s ease-in;
-        }
-
-        .side img {
-            width: calc(100% - 7px);
-            height: calc(100% - 7px);
-        }
-
-        /* Hidden toggle checkbox */
-        #toggle {
-            display: none;
-        }
-
-        /* Checked toggle effects */
-        #toggle:checked + label .thumb {
-            left: calc(100% - 47px);
-            background: rgb(235, 123, 91);
-        }
-
-        #toggle:checked + label .thumb .rotator {
-            transform: translateX(-50%);
-        }
-
-        /* Video backgrounds */
-        .videos {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .video {
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            display: none; /* Initially hide both videos */
-        }
-
-        /* Footer Styles */
-        footer {
-            background-color: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            text-align: center;
-            color: white;
-        }
-    </style>
-</head>
-<body>
+    <!-- header -->
     <header>
-        <div class="w-full p-4 flex items-center justify-between">
-            <span class="text-white text-lg">Your Blog Title</span>
-            <nav class="flex items-center space-x-4">
-                <a href="#">Home</a>
-                <a href="#">Blog</a>
-                <a href="#">Categories</a>
-                <a href="#">Contact Us</a>
-            </nav>
-            <input type="checkbox" name="toggle" id="toggle" />
-            <label for="toggle">
-                <div class="thumb">
-                    <div class="rotator">
-                        <div class="left side">
-                            <img src="backgrounds/moon.png" alt="Night Mode Icon" />
-                        </div>
-                        <div class="right side">
-                            <img src="backgrounds/sun.png" alt="Day Mode Icon" />
-                        </div>
-                    </div>
-                </div>
-            </label>
+      <nav class = "navbar">
+        <div class = "container">
+          <a href = "index.html" class = "navbar-brand">By Gamers For Gamers</a>
+          <div class = "navbar-nav">
+            <a href = "">home</a>
+            <a href = "">design</a>
+            <a href = "">blog</a>
+            <a href = "">about</a>
+          </div>
         </div>
+      </nav>
+      <div class="banner">
+        <video autoplay loop muted playsinline class="banner-video">
+          <source src="images/banner-bg.mp4" type="video/mp4">
+        </video>
+        <div class="container">
+          <h1 class="banner-title">
+            <span>A Blog</span> By Gamers For Gamers
+          </h1>
+          <p>Everything that you want to know about gaming</p>
+          <form>
+            <input type="text" class="search-input" placeholder="find your inner beast . . .">
+            <button type="submit" class="search-btn">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
     </header>
-
-    <main class="content-container">
-        <div class="translucent-window">
-            <h1 class="text-2xl font-bold mb-4">Welcome to Blog</h1>
-            <p>Content goes here...</p>
+    <!-- end of header -->
+    
+    <!-- design -->
+    <section class = "design" id = "design">
+      <div class = "container">
+        <div class = "title">
+          <h2>Recent Gaming News And More</h2>
+          <p>Recent News & Tips and Tricks</p>
         </div>
-    </main>
 
-    <div class="videos">
-        <video id="dayVideo" autoplay muted loop class="video">
-            <source src="backgrounds/day.mp4" type="video/mp4" />
-        </video>
-        <video id="nightVideo" autoplay muted loop class="video">
-            <source src="backgrounds/night.mp4" type="video/mp4" />
-        </video>
-    </div>
+        <div class = "design-content">
+          <!-- item -->
+          <div class = "design-item">
+            <div class = "design-img">
+              <img src = "images/art-design-1.jpg" alt = "">
+              <span><i class = "far fa-heart"></i> 22</span>
+              <span>By Gamers For Gamers</span>
+            </div>
+            <div class = "design-title">
+              <a href = "#">make an awesome art portfolio for college or university</a>
+            </div>
+          </div>
+          <!-- end of item -->
+          <!-- item -->
+          <div class = "design-item">
+            <div class = "design-img">
+              <img src = "images/art-design-2.jpg" alt = "">
+              <span><i class = "far fa-heart"></i> 22</span>
+              <span>By Gamers For Gamers</span>
+            </div>
+            <div class = "design-title">
+              <a href = "#">make an awesome gaming portfolio for college or university</a>
+            </div>
+          </div>
+          <!-- end of item -->
+          <!-- item -->
+          <div class = "design-item">
+            <div class = "design-img">
+              <img src = "images/art-design-3.jpg" alt = "">
+              <span><i class = "far fa-heart"></i> 22</span>
+              <span>By Gamers For Gamers</span>
+            </div>
+            <div class = "design-title">
+              <a href = "#">make an awesome art portfolio for college or university</a>
+            </div>
+          </div>
+          <!-- end of item -->
+          <!-- item -->
+          <div class = "design-item">
+            <div class = "design-img">
+              <img src = "images/art-design-4.jpg" alt = "">
+              <span><i class = "far fa-heart"></i> 22</span>
+              <span>By Gamers For Gamers</span>
+            </div>
+            <div class = "design-title">
+              <a href = "#">make an awesome art portfolio for college or university</a>
+            </div>
+          </div>
+          <!-- end of item -->
+          <!-- item -->
+          <div class = "design-item">
+            <div class = "design-img">
+              <img src = "images/art-design-5.jpg" alt = "">
+              <span><i class = "far fa-heart"></i> 22</span>
+              <span>By Gamers For Gamers</span>
+            </div>
+            <div class = "design-title">
+              <a href = "#">make an awesome art portfolio for college or university</a>
+            </div>
+          </div>
+          <!-- end of item -->
+          <!-- item -->
+          <div class = "design-item">
+            <div class = "design-img">
+              <img src = "images/art-design-6.jpg" alt = "">
+              <span><i class = "far fa-heart"></i> 22</span>
+              <span>By Gamers For Gamers</span>
+            </div>
+            <div class = "design-title">
+              <a href = "#">make an awesome art portfolio for college or university</a>
+            </div>
+          </div>
+          <!-- end of item -->
+        </div>
+      </div>
+    </section>
+    <!-- end of design -->
 
+
+    <!-- blog -->
+    <section class = "blog" id = "blog">
+      <div class = "container">
+        <div class = "title">
+          <h2>Latest Blog</h2>
+          <p>recent blogs about gaming culture</p>
+        </div>
+        <div class = "blog-content">
+          <!-- item -->
+          <div class = "blog-item">
+            <div class = "blog-img">
+              <img src = "images/blog-p-1.jpg" alt = "">
+              <span><i class = "far fa-heart"></i></span>
+            </div>
+            <div class = "blog-text">
+              <span>20 January, 2020</span>
+              <h2>Lorem ipsum, dolor sit amet consectetur adipisicing</h2>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis libero quas ipsum laudantium nihil! Quaerat.</p>
+              <a href = "#">Read More</a>
+            </div>
+          </div>
+          <!-- end of item -->
+          <!-- item -->
+          <div class = "blog-item">
+            <div class = "blog-img">
+              <img src = "images/blog-p-2.jpg" alt = "">
+              <span><i class = "far fa-heart"></i></span>
+            </div>
+            <div class = "blog-text">
+              <span>20 January, 2020</span>
+              <h2>Lorem ipsum, dolor sit amet consectetur adipisicing</h2>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis libero quas ipsum laudantium nihil! Quaerat.</p>
+              <a href = "#">Read More</a>
+            </div>
+          </div>
+          <!-- end of item -->
+          <!-- item -->
+          <div class = "blog-item">
+            <div class = "blog-img">
+              <img src = "images/blog-p-3.jpg" alt = "">
+              <span><i class = "far fa-heart"></i></span>
+            </div>
+            <div class = "blog-text">
+              <span>20 January, 2020</span>
+              <h2>Lorem ipsum, dolor sit amet consectetur adipisicing</h2>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis libero quas ipsum laudantium nihil! Quaerat.</p>
+              <a href = "#">Read More</a>
+            </div>
+          </div>
+          <!-- end of item -->
+          <!-- item -->
+          <div class = "blog-item">
+            <div class = "blog-img">
+              <img src = "images/blog-p-4.jpg" alt = "">
+              <span><i class = "far fa-heart"></i></span>
+            </div>
+            <div class = "blog-text">
+              <span>20 January, 2020</span>
+              <h2>Lorem ipsum, dolor sit amet consectetur adipisicing</h2>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis libero quas ipsum laudantium nihil! Quaerat.</p>
+              <a href = "#">Read More</a>
+            </div>
+          </div>
+          <!-- end of item -->
+          <!-- item -->
+          <div class = "blog-item">
+            <div class = "blog-img">
+              <img src = "images/blog-p-5.jpg" alt = "">
+              <span><i class = "far fa-heart"></i></span>
+            </div>
+            <div class = "blog-text">
+              <span>20 January, 2020</span>
+              <h2>Lorem ipsum, dolor sit amet consectetur adipisicing</h2>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis libero quas ipsum laudantium nihil! Quaerat.</p>
+              <a href = "#">Read More</a>
+            </div>
+          </div>
+          <!-- end of item -->
+          <!-- item -->
+          <div class = "blog-item">
+            <div class = "blog-img">
+              <img src = "images/blog-p-6.jpg" alt = "">
+              <span><i class = "far fa-heart"></i></span>
+            </div>
+            <div class = "blog-text">
+              <span>20 January, 2020</span>
+              <h2>Lorem ipsum, dolor sit amet consectetur adipisicing</h2>
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis libero quas ipsum laudantium nihil! Quaerat.</p>
+              <a href = "#">Read More</a>
+            </div>
+          </div>
+          <!-- end of item -->
+        </div>
+      </div>
+    </section>
+    <!-- end of blog -->
+
+    <!-- about -->
+    <section class = "about" id = "about">
+      <div class = "container">
+        <div class = "about-content">
+          <div>
+            <img src = "images/about-bg.jpg" alt = "">
+          </div>
+          <div class = "about-text">
+            <div class = "title">
+              <h2>Catherine Doe</h2>
+              <p>art & design is my passion</p>
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id totam voluptatem saepe eius ipsum nam provident sapiente, natus et vel eligendi laboriosam odit eos temporibus impedit veritatis ut, illo deserunt illum voluptate quis beatae quod. Necessitatibus provident dicta consectetur labore!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam corrupti natus, eos quia recusandae voluptatem veniam modi officiis minima provident rem sint porro fuga quos tempora ea suscipit vero velit sed laudantium eaque necessitatibus maxime!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end of about -->
+
+    <!-- footer -->
     <footer>
-        <p class="text-sm mt-4">&copy; 2024 Your Blog Title. All rights reserved.</p>
+      <div class = "social-links">
+        <a href = "#"><i class = "fab fa-facebook-f"></i></a>
+        <a href = "#"><i class = "fab fa-twitter"></i></a>
+        <a href = "#"><i class = "fab fa-instagram"></i></a>
+        <a href = "#"><i class = "fab fa-pinterest"></i></a>
+      </div>
+      <span>Art.Design Blog Page</span>
     </footer>
-
-    <script>
-        // JavaScript to handle background toggle
-        const toggle = document.getElementById("toggle");
-        const dayVideo = document.getElementById("dayVideo");
-        const nightVideo = document.getElementById("nightVideo");
-
-        function updateBackground() {
-            if (toggle.checked) {
-                // Show day video and hide night video
-                dayVideo.style.display = "block";
-                nightVideo.style.display = "none";
-            } else {
-                // Show night video and hide day video
-                nightVideo.style.display = "block";
-                dayVideo.style.display = "none";
-            }
-        }
-
-        // Initialize background on load
-        nightVideo.style.display = "block"; // Start with night mode
-        dayVideo.style.display = "none"; // Hide day video initially
-
-        // Update background when toggle changes
-        toggle.addEventListener("change", updateBackground);
-    </script>
-</body>
+    <!-- end of footer -->
+    
+    
+  </body>
 </html>
