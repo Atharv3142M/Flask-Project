@@ -3,21 +3,19 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Blog Title with Day/Night Toggle</title>
+    <title>Blog Title with Day-Night Toggle</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-size: cover;
-            background-position: center;
             color: white;
+            transition: background-image 1s ease-in-out;
             overflow-y: auto;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            transition: background 0.5s ease-in-out;
         }
 
         .translucent-window {
@@ -46,9 +44,6 @@
             z-index: 1000;
             background-color: rgba(0, 0, 0, 0.8);
             padding: 10px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         header nav a {
@@ -57,6 +52,7 @@
             color: white;
         }
 
+        /* Footer Styles */
         footer {
             background-color: rgba(0, 0, 0, 0.9);
             padding: 20px;
@@ -64,122 +60,67 @@
             color: white;
         }
 
-        .footer-container {
+        /* Day-Night Toggle Styles */
+        .toggle-container {
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: auto;
+            align-items: center;
         }
-
-        .footer-section {
-            flex: 1;
-            min-width: 150px;
-            margin: 10px;
-        }
-
-        .footer-section h3 {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .footer-section a {
-            display: block;
-            color: white;
-            margin: 5px 0;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: #2e86de;
-        }
-
-        .footer-contact p {
-            margin: 5px 0;
-        }
-
-        /* Day/Night Toggle Styles */
         label {
             display: block;
-            width: 100px;
-            height: 50px;
+            width: 60px;
+            height: 30px;
             background: rgb(202, 202, 202);
-            border-radius: 30mm;
+            border-radius: 30px;
             position: relative;
             cursor: pointer;
             overflow: hidden;
-            box-shadow: 0 0 15px 5px rgba(83, 180, 229, 0.5);
+            z-index: 1;
+            margin-left: 20px;
         }
-
         label .thumb {
             position: absolute;
-            width: 44px;
-            height: 44px;
+            width: 28px;
+            height: 28px;
             background: rgb(23, 24, 33);
-            top: 3px;
-            left: 3px;
+            top: 1px;
+            left: 1px;
             border-radius: 50%;
-            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2), 3px 3px 0 rgba(100, 100, 100, 0.2);
-            overflow: hidden;
             transition: 0.5s ease-in;
         }
-
-        .rotator {
-            display: block;
-            width: 200%;
-            height: 100%;
-            position: relative;
+        .thumb .rotator {
             display: flex;
             align-items: center;
             transition: 0.5s ease-in;
         }
-
         .side {
-            width: 100%;
-            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.5s ease-in;
         }
-
+        .side img {
+            width: 100%;
+            height: 100%;
+        }
         #toggle:checked + label .thumb {
-            left: calc(100% - 47px);
+            left: calc(100% - 31px);
             background: rgb(235, 123, 91);
         }
-
-        #toggle:checked + label .thumb .rotator {
-            transform: translateX(-50%);
-        }
-
-        #toggle {
-            display: none;
-        }
-
         .videos {
             position: fixed;
             right: 0;
             bottom: 0;
             width: 200vw;
             height: 100%;
+            z-index: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: -1;
         }
-
         .video {
             width: 100vw;
         }
-
         #toggle:checked ~ .videos {
             transform: translateX(50%);
-        }
-
-        #toggle:checked + label {
-            box-shadow: 0 0 15px 5px rgba(229, 83, 83, 0.5);
         }
     </style>
 </head>
@@ -188,6 +129,21 @@
         <div class="w-full p-4 flex items-center justify-between">
             <div class="flex items-center">
                 <span class="text-white text-lg">Your Blog Title</span>
+                <div class="toggle-container">
+                    <input type="checkbox" id="toggle"/>
+                    <label for="toggle">
+                        <div class="thumb">
+                            <div class="rotator">
+                                <div class="left side">
+                                    <img src="backgrounds/moon.png" alt="Night Mode Icon"/>
+                                </div>
+                                <div class="right side">
+                                    <img src="backgrounds/sun.png" alt="Day Mode Icon"/>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
             </div>
             <nav class="flex items-center space-x-4">
                 <a href="#">Home</a>
@@ -195,20 +151,6 @@
                 <a href="#">Categories</a>
                 <a href="#">Contact Us</a>
             </nav>
-            <input type="checkbox" name="toggle" id="toggle" />
-            <label for="toggle">
-                <div class="thumb">
-                    <div class="rotator">
-                        <div class="left side">
-                            <img src="backgrounds/moon.png" alt="Night Mode Icon"/>
-                        </div>
-                        <div class="right side">
-                            <img src="backgrounds/sun.png" alt="Day Mode Icon"/>
-
-                        </div>
-                    </div>
-                </div>
-            </label>
         </div>
     </header>
 
@@ -219,6 +161,10 @@
         </div>
     </main>
 
+    <footer>
+        <p class="text-sm mt-4">&copy; 2024 Your Blog Title. All rights reserved.</p>
+    </footer>
+
     <div class="videos">
         <video autoplay muted loop class="video">
             <source src="backgrounds/day.mp4" type="video/mp4" />
@@ -228,31 +174,11 @@
         </video>
     </div>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <a href="#">Our Services</a>
-                <a href="#">Membership</a>
-                <a href="#">Resources</a>
-                <a href="#">Our Clients</a>
-                <a href="#">About Us</a>
-                <a href="#">Contact Us</a>
-            </div>
-            <div class="footer-section footer-contact">
-                <h3>Get in Touch</h3>
-                <p>IN +91 ***********</p>
-                <p>xxx@gmail.com</p>
-            </div>
-            <div class="footer-section">
-                <h3>Connect with Us</h3>
-                <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
-                <a href="#"><i class="fab fa-discord"></i> Discord</a>
-                <a href="#"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-        </div>
-        <p class="text-sm mt-4">&copy; 2024 Your Blog Title. All rights reserved.</p>
-    </footer>
+    <script>
+        // Add toggle functionality
+        document.getElementById('toggle').addEventListener('change', function() {
+            document.body.classList.toggle('night-mode', this.checked);
+        });
+    </script>
 </body>
 </html>
-
