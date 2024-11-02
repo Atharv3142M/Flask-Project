@@ -11,31 +11,12 @@
         /* Global styles */
         body {
             font-family: 'Roboto', sans-serif;
-            background: url('flask/backgrounds/images/day.mp4') no-repeat center center/cover;
             color: white;
             overflow-y: auto;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             transition: background 0.5s ease-in-out;
-        }
-
-        .translucent-window {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 800px;
-            margin: 20px auto;
-            text-align: left;
-        }
-
-        .content-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 80px;
-            flex-grow: 1;
         }
 
         /* Header Styles */
@@ -58,85 +39,93 @@
             color: white;
         }
 
-        /* Footer styles */
-        footer {
-            background-color: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            text-align: center;
-            color: white;
-        }
-
         /* Day/Night Toggle Styles */
-        .toggle-container {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .toggle {
-            width: 50px;
-            height: 25px;
-            background: gray;
-            border-radius: 50px;
+        label {
+            display: block;
+            width: 100px;
+            height: 50px;
+            background: rgb(202, 202, 202);
+            border-radius: 30mm;
             position: relative;
             cursor: pointer;
-            transition: background 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 0 15px 5px rgba(83, 180, 229, 0.5);
         }
 
-        .toggle::before {
-            content: '';
+        label .thumb {
             position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 21px;
-            height: 21px;
-            background: white;
+            width: 44px;
+            height: 44px;
+            background: rgb(23, 24, 33);
+            top: 3px;
+            left: 3px;
             border-radius: 50%;
-            transition: 0.3s ease;
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2), 3px 3px 0 rgba(100, 100, 100, 0.2);
+            overflow: hidden;
+            transition: 0.5s ease-in;
         }
 
-        #toggle-checkbox:checked + .toggle {
-            background: #e57b5b;
+        .rotator {
+            display: block;
+            width: 200%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            transition: 0.5s ease-in;
         }
 
-        #toggle-checkbox:checked + .toggle::before {
-            transform: translateX(25px);
+        .side {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.5s ease-in;
         }
 
-        /* Day/Night video backgrounds */
-        #toggle-checkbox:checked ~ .videos .day-video {
-            opacity: 0;
+        .side img {
+            width: calc(100% - 7px);
+            height: calc(100% - 7px);
         }
 
-        #toggle-checkbox:checked ~ .videos .night-video {
-            opacity: 1;
+        #toggle:checked + label .thumb .rotator {
+            transform: translateX(-50%);
+            background: rgb(235, 123, 91);
         }
 
+        #toggle:checked + label .thumb {
+            left: calc(100% - 47px);
+        }
+
+        #toggle {
+            display: none;
+        }
+
+        /* Video background styling */
         .videos {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            right: 0;
+            bottom: 0;
+            width: 200vw;
             height: 100%;
             z-index: -1;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             overflow: hidden;
+            transition: transform 0.5s ease;
         }
 
         .video {
             width: 100vw;
             height: 100vh;
             object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: opacity 0.5s ease-in-out;
         }
 
-        .day-video { opacity: 1; }
-        .night-video { opacity: 0; }
+        /* Toggle video background on checkbox */
+        #toggle:checked ~ .videos {
+            transform: translateX(50%);
+        }
 
     </style>
 </head>
@@ -150,10 +139,19 @@
                 <a href="#">Categories</a>
                 <a href="#">Contact Us</a>
             </nav>
-            <div class="toggle-container">
-                <input type="checkbox" id="toggle-checkbox" hidden />
-                <label for="toggle-checkbox" class="toggle"></label>
-            </div>
+            <input type="checkbox" name="toggle" id="toggle" />
+            <label for="toggle">
+                <div class="thumb">
+                    <div class="rotator">
+                        <div class="left side">
+                            <img src="backgrounds/moon.png" alt="Night Mode Icon" />
+                        </div>
+                        <div class="right side">
+                            <img src="backgrounds/sun.png" alt="Day Mode Icon" />
+                        </div>
+                    </div>
+                </div>
+            </label>
         </div>
     </header>
 
@@ -165,17 +163,16 @@
     </main>
 
     <div class="videos">
-        <video autoplay muted loop class="video day-video">
-            <source src="flask/backgrounds/images/day.mp4" type="video/mp4" />
+        <video autoplay muted loop class="video">
+            <source src="backgrounds/day.mp4" type="video/mp4" />
         </video>
-        <video autoplay muted loop class="video night-video">
-            <source src="flask/backgrounds/images/night.mp4" type="video/mp4" />
+        <video autoplay muted loop class="video">
+            <source src="backgrounds/night.mp4" type="video/mp4" />
         </video>
     </div>
 
     <footer>
         <p class="text-sm mt-4">&copy; 2024 Your Blog Title. All rights reserved.</p>
     </footer>
-
 </body>
 </html>
