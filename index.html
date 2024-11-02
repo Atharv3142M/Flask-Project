@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Blog Title</title>
+    <title>Blog Title with Day/Night Toggle</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
@@ -13,11 +13,11 @@
             background-size: cover;
             background-position: center;
             color: white;
-            transition: background-image 1s ease-in-out;
-            overflow-y: auto; /* Ensure page scrolls */
+            overflow-y: auto;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            transition: background 0.5s ease-in-out;
         }
 
         .translucent-window {
@@ -34,7 +34,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 80px; /* Ensure space below the header */
+            padding-top: 80px;
             flex-grow: 1;
         }
 
@@ -46,6 +46,9 @@
             z-index: 1000;
             background-color: rgba(0, 0, 0, 0.8);
             padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         header nav a {
@@ -96,23 +99,91 @@
         .footer-contact p {
             margin: 5px 0;
         }
+
+        /* Day/Night Toggle Styles */
+        label {
+            display: block;
+            width: 100px;
+            height: 50px;
+            background: rgb(202, 202, 202);
+            border-radius: 30mm;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 0 15px 5px rgba(83, 180, 229, 0.5);
+        }
+
+        label .thumb {
+            position: absolute;
+            width: 44px;
+            height: 44px;
+            background: rgb(23, 24, 33);
+            top: 3px;
+            left: 3px;
+            border-radius: 50%;
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2), 3px 3px 0 rgba(100, 100, 100, 0.2);
+            overflow: hidden;
+            transition: 0.5s ease-in;
+        }
+
+        .rotator {
+            display: block;
+            width: 200%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            transition: 0.5s ease-in;
+        }
+
+        .side {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.5s ease-in;
+        }
+
+        #toggle:checked + label .thumb {
+            left: calc(100% - 47px);
+            background: rgb(235, 123, 91);
+        }
+
+        #toggle:checked + label .thumb .rotator {
+            transform: translateX(-50%);
+        }
+
+        #toggle {
+            display: none;
+        }
+
+        .videos {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            width: 200vw;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: -1;
+        }
+
+        .video {
+            width: 100vw;
+        }
+
+        #toggle:checked ~ .videos {
+            transform: translateX(50%);
+        }
+
+        #toggle:checked + label {
+            box-shadow: 0 0 15px 5px rgba(229, 83, 83, 0.5);
+        }
     </style>
-    <script>
-        let backgrounds = [];
-        for (let i = 1; i <= 14; i++) {
-            backgrounds.push(`backgrounds/background${i}.png`);
-        }
-        let currentBackground = 0;
-
-        function changeBackground() {
-            currentBackground = (currentBackground + 1) % backgrounds.length;
-            document.body.style.backgroundImage = `url(${backgrounds[currentBackground]})`;
-        }
-
-        setInterval(changeBackground, 5000);
-    </script>
 </head>
-<body style="background-image: url('backgrounds/background1.png');">
+<body>
     <header>
         <div class="w-full p-4 flex items-center justify-between">
             <div class="flex items-center">
@@ -124,41 +195,39 @@
                 <a href="#">Categories</a>
                 <a href="#">Contact Us</a>
             </nav>
+            <input type="checkbox" name="toggle" id="toggle" />
+            <label for="toggle">
+                <div class="thumb">
+                    <div class="rotator">
+                        <div class="left side">
+                            <img src="backgrounds/moon.png" alt="Night Mode Icon"/>
+                        </div>
+                        <div class="right side">
+                            <img src="backgrounds/sun.png" alt="Day Mode Icon"/>
+
+                        </div>
+                    </div>
+                </div>
+            </label>
         </div>
     </header>
+
     <main class="content-container">
         <div class="translucent-window">
             <h1 class="text-2xl font-bold mb-4">Welcome to Blog</h1>
-            <p>Yaha Pe Sab Likhna hai jo bhi maal paani hai voh</p>
-            <p>Based on your current HTML, CSS, and JavaScript structure, here’s a refined distribution of roles and tasks for your team:</p>
-            <p>1. *Backend Developer:*
-   - *Task:* Implement the server-side logic using Python and Flask. This includes:
-     - Setting up the Flask app and configuring it.
-     - Creating API endpoints for fetching blog posts, creating new posts, and handling user authentication (if needed).
-     - Connecting to a database (like SQLite or PostgreSQL) to store blog content.
-   - *Skills Needed:* Python, Flask, SQLAlchemy (or any other ORM), and basic knowledge of RESTful APIs.</p>
-            <p>2. *Frontend Developer:*
-   - *Task:* Work on enhancing and implementing the interactive aspects of the website. Responsibilities include:
-     - Integrating the provided HTML and CSS with the Flask templates to dynamically display blog content.
-     - Implementing additional JavaScript features such as form submissions for comments or new blog posts.
-     - Ensuring the website is responsive and works well on different devices.
-   - *Skills Needed:* Proficiency in HTML, CSS, JavaScript, and experience with Flask templating.</p>
-            <p>3. *Content & Testing Manager:*
-   - *Task:* Focus on creating engaging and relevant content for the blog and testing the website for usability. This includes:
-     - Writing sample blog posts and ensuring they are formatted correctly.
-     - Conducting user testing to identify any usability issues or bugs in the design.
-     - Documenting feedback and working with the team to make necessary adjustments.
-   - *Skills Needed:* Good writing skills, attention to detail, and basic knowledge of testing methodologies.</p>
-        </div>
-        <div class="translucent-window">
-            <h2 class="text-xl font-bold mb-2">Latest Articles</h2>
-            <ul>
-                <li><a href="#" class="text-blue-400">Idhar aur pages link kar sakte hai</a></li>
-                <li><a href="#" class="text-blue-400">-//-</a></li>
-                <li><a href="#" class="text-blue-400">-//-</a></li>
-            </ul>
+            <p>Content goes here...</p>
         </div>
     </main>
+
+    <div class="videos">
+        <video autoplay muted loop class="video">
+            <source src="backgrounds/day.mp4" type="video/mp4" />
+        </video>
+        <video autoplay muted loop class="video">
+            <source src="backgrounds/night.mp4" type="video/mp4" />
+        </video>
+    </div>
+
     <footer>
         <div class="footer-container">
             <div class="footer-section">
@@ -173,17 +242,17 @@
             <div class="footer-section footer-contact">
                 <h3>Get in Touch</h3>
                 <p>IN +91 ***********</p>
-                <p>IN +91 ***********</p>
-                <p>chhichore.mssu.ke@gmail.com</p>
+                <p>xxx@gmail.com</p>
             </div>
             <div class="footer-section">
                 <h3>Connect with Us</h3>
-                <a href="http://www.youtube.com/@yoursfaithfulgamer"><i class="fab fa-youtube"></i> YouTube</a>
-                <a href="https://discord.com/users/556853648399794177"><i class="fab fa-discord"></i> Discord</a>
-                <a href="https://github.com/Atharv3142M"><i class="fab fa-github"></i> GitHub</a>
-                <a href="https://linktr.ee/atharvpose"><i class="fas fa-user"></i> About The Developer</a></div>
+                <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+                <a href="#"><i class="fab fa-discord"></i> Discord</a>
+                <a href="#"><i class="fab fa-github"></i> GitHub</a>
             </div>
+        </div>
         <p class="text-sm mt-4">&copy; 2024 Your Blog Title. All rights reserved.</p>
     </footer>
 </body>
 </html>
+
