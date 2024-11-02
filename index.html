@@ -204,16 +204,19 @@
 
         function updateBackground() {
             if (toggle.checked) {
-                dayVideo.style.display = "none";
-                nightVideo.style.display = "block";
-            } else {
-                nightVideo.style.display = "none";
+                // Show day video and hide night video
                 dayVideo.style.display = "block";
+                nightVideo.style.display = "none";
+            } else {
+                // Show night video and hide day video
+                nightVideo.style.display = "block";
+                dayVideo.style.display = "none";
             }
         }
 
         // Initialize background on load
-        updateBackground();
+        nightVideo.style.display = "block"; // Start with night mode
+        dayVideo.style.display = "none"; // Hide day video initially
 
         // Update background when toggle changes
         toggle.addEventListener("change", updateBackground);
