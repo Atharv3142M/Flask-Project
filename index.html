@@ -8,7 +8,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
     <style>
-        /* Base styles */
         body {
             font-family: 'Roboto', sans-serif;
             color: white;
@@ -127,27 +126,19 @@
         /* Video backgrounds */
         .videos {
             position: fixed;
-            right: 0;
-            bottom: 0;
-            width: 200vw;
+            top: 0;
+            left: 0;
+            width: 100vw;
             height: 100vh;
             z-index: -1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
-            transition: transform 0.5s ease;
         }
 
         .video {
             width: 100vw;
             height: 100vh;
             object-fit: cover;
-        }
-
-        /* Toggle video backgrounds */
-        #toggle:checked ~ .videos {
-            transform: translateX(50%);
+            display: none; /* Initially hide both videos */
         }
 
         /* Footer Styles */
@@ -157,7 +148,6 @@
             text-align: center;
             color: white;
         }
-
     </style>
 </head>
 <body>
@@ -194,10 +184,10 @@
     </main>
 
     <div class="videos">
-        <video autoplay muted loop class="video">
+        <video id="dayVideo" autoplay muted loop class="video">
             <source src="backgrounds/day.mp4" type="video/mp4" />
         </video>
-        <video autoplay muted loop class="video">
+        <video id="nightVideo" autoplay muted loop class="video">
             <source src="backgrounds/night.mp4" type="video/mp4" />
         </video>
     </div>
@@ -209,10 +199,24 @@
     <script>
         // JavaScript to handle background toggle
         const toggle = document.getElementById("toggle");
-        toggle.addEventListener("change", () => {
-            document.body.classList.toggle("light-mode", toggle.checked);
-        });
+        const dayVideo = document.getElementById("dayVideo");
+        const nightVideo = document.getElementById("nightVideo");
+
+        function updateBackground() {
+            if (toggle.checked) {
+                dayVideo.style.display = "none";
+                nightVideo.style.display = "block";
+            } else {
+                nightVideo.style.display = "none";
+                dayVideo.style.display = "block";
+            }
+        }
+
+        // Initialize background on load
+        updateBackground();
+
+        // Update background when toggle changes
+        toggle.addEventListener("change", updateBackground);
     </script>
 </body>
 </html>
-
