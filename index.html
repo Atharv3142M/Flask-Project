@@ -3,20 +3,39 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Blog Title with Day-Night Toggle</title>
+    <title>Blog Title with Day/Night Toggle</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
     <style>
-        /* Main Styles */
+        /* Global styles */
         body {
             font-family: 'Roboto', sans-serif;
+            background: url('flask/backgrounds/images/day.mp4') no-repeat center center/cover;
             color: white;
-            transition: background-color 0.5s ease;
             overflow-y: auto;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            transition: background 0.5s ease-in-out;
+        }
+
+        .translucent-window {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+            flex-grow: 1;
         }
 
         /* Header Styles */
@@ -28,6 +47,9 @@
             z-index: 1000;
             background-color: rgba(0, 0, 0, 0.8);
             padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         header nav a {
@@ -36,38 +58,60 @@
             color: white;
         }
 
-        /* Toggle Styles */
+        /* Footer styles */
+        footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        /* Day/Night Toggle Styles */
         .toggle-container {
             display: flex;
             align-items: center;
+            cursor: pointer;
         }
-        label {
-            display: block;
-            width: 60px;
-            height: 30px;
-            background: #ccc;
-            border-radius: 30px;
+
+        .toggle {
+            width: 50px;
+            height: 25px;
+            background: gray;
+            border-radius: 50px;
             position: relative;
             cursor: pointer;
-            overflow: hidden;
-            margin-left: 20px;
+            transition: background 0.3s ease;
         }
-        .thumb {
+
+        .toggle::before {
+            content: '';
             position: absolute;
-            width: 28px;
-            height: 28px;
-            background: #111;
-            top: 1px;
-            left: 1px;
+            top: 2px;
+            left: 2px;
+            width: 21px;
+            height: 21px;
+            background: white;
             border-radius: 50%;
-            transition: 0.5s ease;
+            transition: 0.3s ease;
         }
-        #toggle:checked + label .thumb {
-            left: calc(100% - 29px);
+
+        #toggle-checkbox:checked + .toggle {
             background: #e57b5b;
         }
 
-        /* Video Styles */
+        #toggle-checkbox:checked + .toggle::before {
+            transform: translateX(25px);
+        }
+
+        /* Day/Night video backgrounds */
+        #toggle-checkbox:checked ~ .videos .day-video {
+            opacity: 0;
+        }
+
+        #toggle-checkbox:checked ~ .videos .night-video {
+            opacity: 1;
+        }
+
         .videos {
             position: fixed;
             top: 0;
@@ -75,41 +119,41 @@
             width: 100%;
             height: 100%;
             z-index: -1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
         }
+
         .video {
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             object-fit: cover;
             position: absolute;
             top: 0;
             left: 0;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.5s ease-in-out;
         }
-        #day-video { opacity: 1; }
-        #night-video { opacity: 0; }
-        #toggle:checked ~ .videos #day-video { opacity: 0; }
-        #toggle:checked ~ .videos #night-video { opacity: 1; }
+
+        .day-video { opacity: 1; }
+        .night-video { opacity: 0; }
+
     </style>
 </head>
 <body>
     <header>
         <div class="w-full p-4 flex items-center justify-between">
-            <div class="flex items-center">
-                <span class="text-white text-lg">Your Blog Title</span>
-                <div class="toggle-container">
-                    <input type="checkbox" id="toggle"/>
-                    <label for="toggle">
-                        <div class="thumb"></div>
-                    </label>
-                </div>
-            </div>
+            <span class="text-white text-lg">Your Blog Title</span>
             <nav class="flex items-center space-x-4">
                 <a href="#">Home</a>
                 <a href="#">Blog</a>
                 <a href="#">Categories</a>
                 <a href="#">Contact Us</a>
             </nav>
+            <div class="toggle-container">
+                <input type="checkbox" id="toggle-checkbox" hidden />
+                <label for="toggle-checkbox" class="toggle"></label>
+            </div>
         </div>
     </header>
 
@@ -120,21 +164,18 @@
         </div>
     </main>
 
+    <div class="videos">
+        <video autoplay muted loop class="video day-video">
+            <source src="flask/backgrounds/images/day.mp4" type="video/mp4" />
+        </video>
+        <video autoplay muted loop class="video night-video">
+            <source src="flask/backgrounds/images/night.mp4" type="video/mp4" />
+        </video>
+    </div>
+
     <footer>
         <p class="text-sm mt-4">&copy; 2024 Your Blog Title. All rights reserved.</p>
     </footer>
 
-    <div class="videos">
-        <video autoplay muted loop class="video" id="day-video">
-            <source src="backgrounds/day.mp4" type="video/mp4" />
-        </video>
-        <video autoplay muted loop class="video" id="night-video">
-            <source src="backgrounds/night.mp4" type="video/mp4" />
-        </video>
-    </div>
-
-    <script>
-        // No additional JavaScript needed; CSS handles the toggle functionality
-    </script>
 </body>
 </html>
