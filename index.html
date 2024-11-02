@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
     <style>
-        /* Global styles */
+        /* Base styles */
         body {
             font-family: 'Roboto', sans-serif;
             color: white;
@@ -17,6 +17,27 @@
             display: flex;
             flex-direction: column;
             transition: background 0.5s ease-in-out;
+        }
+
+        /* Center content alignment */
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 100px;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        /* Translucent content box */
+        .translucent-window {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
         }
 
         /* Header Styles */
@@ -39,7 +60,7 @@
             color: white;
         }
 
-        /* Day/Night Toggle Styles */
+        /* Toggle Styles */
         label {
             display: block;
             width: 100px;
@@ -88,26 +109,28 @@
             height: calc(100% - 7px);
         }
 
-        #toggle:checked + label .thumb .rotator {
-            transform: translateX(-50%);
-            background: rgb(235, 123, 91);
-        }
-
-        #toggle:checked + label .thumb {
-            left: calc(100% - 47px);
-        }
-
+        /* Hidden toggle checkbox */
         #toggle {
             display: none;
         }
 
-        /* Video background styling */
+        /* Checked toggle effects */
+        #toggle:checked + label .thumb {
+            left: calc(100% - 47px);
+            background: rgb(235, 123, 91);
+        }
+
+        #toggle:checked + label .thumb .rotator {
+            transform: translateX(-50%);
+        }
+
+        /* Video backgrounds */
         .videos {
             position: fixed;
             right: 0;
             bottom: 0;
             width: 200vw;
-            height: 100%;
+            height: 100vh;
             z-index: -1;
             display: flex;
             align-items: center;
@@ -122,9 +145,17 @@
             object-fit: cover;
         }
 
-        /* Toggle video background on checkbox */
+        /* Toggle video backgrounds */
         #toggle:checked ~ .videos {
             transform: translateX(50%);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            text-align: center;
+            color: white;
         }
 
     </style>
@@ -174,5 +205,14 @@
     <footer>
         <p class="text-sm mt-4">&copy; 2024 Your Blog Title. All rights reserved.</p>
     </footer>
+
+    <script>
+        // JavaScript to handle background toggle
+        const toggle = document.getElementById("toggle");
+        toggle.addEventListener("change", () => {
+            document.body.classList.toggle("light-mode", toggle.checked);
+        });
+    </script>
 </body>
 </html>
+
